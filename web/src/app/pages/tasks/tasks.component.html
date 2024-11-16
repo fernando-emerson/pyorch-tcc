@@ -1,0 +1,115 @@
+<div class="w-full">
+  <h1 class="text-2xl font-bold mb-1">Fila de tarefas</h1>
+  <app-breadcrumb [path]="path"></app-breadcrumb>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+    @if (tasks.length > 0) {
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table
+        class="table table-md w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead
+          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-base-200 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3">#</th>
+            <th scope="col" class="px-6 py-3">Task id</th>
+            <th scope="col" class="px-6 py-3">Automação</th>
+            <th scope="col" class="px-6 py-3">Status</th>
+            <th scope="col" class="px-6 py-3">Prioridade</th>
+            <th scope="col" class="px-6 py-3">Progresso</th>
+            <th scope="col" class="px-6 py-3">Data de início</th>
+            <th scope="col" class="px-6 py-3">Data de conclusão</th>
+            <!-- <th scope="col" class="px-6 py-3">Ações</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of paginatedTasks; track $index) {
+          <tr scope="col" class="bg-white dark:bg-base-100 hover">
+            <td class="px-6 py-4">{{ task.id }}</td>
+            <td class="px-6 py-4">{{ task.task_id }}</td>
+            <td class="px-6 py-4">
+              <i class="fa-brands fa-python mr-2"></i
+              >{{ task.automation?.name }}
+            </td>
+            <td class="px-6 py-4">
+              <div
+                class="badge"
+                [ngClass]="{
+                  'badge-error': task.status === 'Falha',
+                  'badge-info': task.status === 'Executando',
+                  'badge-warning': task.status === 'Aguardando',
+                  'badge-success': task.status === 'Concluído'
+                }"
+              >
+                {{ task.status }}
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div
+                class="badge"
+                [ngClass]="{
+                  'badge-warning': task.priority === 'Alta',
+                  'badge-secondary': task.priority === 'Média',
+                  'badge-light': task.priority === 'Baixa'
+                }"
+              >
+                {{ task.priority }}
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <progress
+                class="progress w-56"
+                [ngClass]="{
+                  'progress-success': task.progress === 100,
+                  'progress-error': task.status === 'Falha',
+                  'progress-primary': task.progress < 100
+                }"
+                [value]="task.progress"
+                max="100"
+              ></progress>
+            </td>
+            <td class="px-6 py-4">{{ task.started_at || "Não agendado" }}</td>
+            <td class="px-6 py-4">
+              {{ task.finished_at || "Nunca executado" }}
+            </td>
+            <!-- <td class="px-6 py-4">
+              <label>
+                <button class="btn btn-sm mr-3 font-normal">
+                  <i class="fa-solid fa-stop"></i>
+                  Pausar
+                </button>
+              </label>
+
+              <button class="btn btn-sm mr-3 font-normal">
+                <i class="fa-solid fa-xmark"></i>
+                Cancelar
+              </button>
+            </td> -->
+          </tr>
+          }
+        </tbody>
+      </table>
+      <div class="pagination flex justify-end p-4">
+        <div class="join">
+          @for (page of numPages; track $index) {
+          <button
+            class="join-item btn"
+            [ngClass]="{ 'btn-active': currentPage == page }"
+            (click)="currentPage = page"
+          >
+            {{ page }}
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div class="text-center px-6 py-4 mt-4">
+      <h2 class="text-xl font-bold mb-2">
+        <i class="fa-regular fa-folder-open"></i> Nenhuma execução na fila
+      </h2>
+      <p class="text-gray-600">Comece agora mesmo e crie uma nova automação!</p>
+    </div>
+    }
+  </div>
+</div>

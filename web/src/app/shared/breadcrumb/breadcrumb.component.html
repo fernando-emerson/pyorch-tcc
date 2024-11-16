@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="breadcrumbs text-sm">
+    <ul>
+      <li>
+        <a routerLink="/home">
+          <i
+            class="fa-solid fa-house fa-fw mr-2"
+            style="font-size: smaller"
+          ></i>
+          Home
+        </a>
+      </li>
+      @for (item of path; track $index) {
+      <li>
+        <a routerLink="item.link">
+          <i
+            class="fa-fw mr-2"
+            style="font-size: smaller"
+            [ngClass]="item.icon"
+          ></i>
+          {{ item.name }}
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<!-- Seção 1: Status das Tarefas -->
+<div class="mb-10">
+  <div
+    class="stats shadow-lg bg-base-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+  >
+    <!-- Tarefas Concluídas -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-success mt-5">
+        <i class="fa-solid fa-check-circle text-3xl"></i>
+      </div>
+      <div class="stat-title">Tarefas Concluídas</div>
+      <div class="stat-value text-success mt-3">{{ stats?.success }}</div>
+    </div>
+
+    <!-- Tarefas Pendentes -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-warning mt-5">
+        <i class="fa-solid fa-hourglass-half text-3xl"></i>
+      </div>
+      <div class="stat-title">Pendente</div>
+      <div class="stat-value text-warning mt-3">{{ stats?.waiting }}</div>
+    </div>
+
+    <!-- Erros de Execução -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-error mt-5">
+        <i class="fa-solid fa-exclamation-triangle text-3xl"></i>
+      </div>
+      <div class="stat-title">Erros de Execução</div>
+      <div class="stat-value text-error mt-3">{{ stats?.failures }}</div>
+    </div>
+
+    <!-- Execuções Canceladas -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-gray-500 mt-5">
+        <i class="fa-solid fa-ban text-3xl"></i>
+      </div>
+      <div class="stat-title">Execuções Canceladas</div>
+      <div class="stat-value mt-3">0</div>
+    </div>
+  </div>
+</div>
+
+<!-- Seção 2: Automações Configuradas -->
+<div>
+  <div
+    class="stats shadow-lg bg-base-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6"
+  >
+    <!-- Número de Automações -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-primary mt-5">
+        <i class="fa-solid fa-robot text-3xl"></i>
+      </div>
+      <div class="stat-title">Número de Automações</div>
+      <div class="stat-value text-primary mt-3">
+        {{ stats?.total_automations }}
+      </div>
+    </div>
+
+    <!-- Disparos -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-accent mt-5">
+        <i class="fa-solid fa-bolt text-3xl"></i>
+      </div>
+      <div class="stat-title">Disparos</div>
+      <div class="stat-value text-accent mt-3">{{ stats?.triggered }}</div>
+    </div>
+
+    <!-- Robôs Inativos -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-warning mt-5">
+        <i class="fa-solid fa-power-off text-3xl"></i>
+      </div>
+      <div class="stat-title">Robôs Inativos</div>
+      <div class="stat-value text-warning mt-3">0</div>
+    </div>
+
+    <!-- Tarefas Agendadas -->
+    <div class="stat place-items-center">
+      <div class="stat-figure text-info mt-5">
+        <i class="fa-solid fa-calendar-alt text-3xl"></i>
+      </div>
+      <div class="stat-title">Tarefas Agendadas</div>
+      <div class="stat-value text-info mt-3">0</div>
+    </div>
+  </div>
+</div>

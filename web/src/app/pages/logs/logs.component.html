@@ -1,0 +1,66 @@
+<div class="w-full">
+  <h1 class="text-2xl font-bold mb-1">Monitoramento de logs</h1>
+  <app-breadcrumb [path]="path"></app-breadcrumb>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+    @if (logs) {
+    <table class="table table-md w-full text-sm text-left rtl:text-right">
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-base-200 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">Task id</th>
+          <th scope="col" class="px-6 py-3">Nivel</th>
+          <!-- <th scope="col" class="px-6 py-3">Automação</th> -->
+          <th scope="col" class="px-6 py-3">Mensagem</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (log of paginatedlogs; track $index) {
+        <tr scope="col" class="bg-white dark:bg-base-100 hover">
+          <td class="px-6 py-4">{{ log.taskid }}</td>
+          <td class="px-6 py-4">
+            <div
+              class="badge"
+              [ngClass]="{
+                'badge-error': log.nivel === 'ERROR',
+                'badge-info': log.nivel === 'INFO',
+                'badge-warning': log.nivel === 'WARNING',
+                'badge-neutral': log.nivel === 'DEBUG'
+              }"
+            >
+              {{ log.nivel }}
+            </div>
+          </td>
+
+          <!-- <td class="px-6 py-4">
+            <i class="fa-brands fa-python mr-2"></i>{{ log.automation_id }}
+          </td> -->
+          <td class="px-6 py-4">{{ log.message }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="pagination flex justify-end p-4">
+      <div class="join">
+        @for (page of numPages; track $index) {
+        <button
+          class="join-item btn"
+          [ngClass]="{ 'btn-active': currentPage == page }"
+          (click)="currentPage = page"
+        >
+          {{ page }}
+        </button>
+        }
+      </div>
+    </div>
+    } @else {
+    <div class="text-center px-6 py-4 mt-4">
+      <h2 class="text-xl font-bold mb-2">
+        <i class="fa-regular fa-folder-open"></i> Nenhuma log foi encontrado
+      </h2>
+      <p class="text-gray-600">Comece agora mesmo e crie uma nova automação!</p>
+    </div>
+    }
+  </div>
+</div>
